@@ -11,45 +11,60 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Developer Docs",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Chat Mode",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "Developer-Docs/chat-mode/step-1-datamart-workspace",
+              "Developer-Docs/chat-mode/step-2-create-data-app"
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Helpers",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "Developer-Docs/helpers/embed-function",
+              "Developer-Docs/helpers/server-event",
+              "Developer-Docs/helpers/token-body"
+            ]
+          },
+          {
+            "group": "SSO Login",
+            "pages": [
+              "Developer-Docs/sso-login/index"
+            ]
+          },
+          {
+            "group": "Setup",
+            "pages": [
+              "Developer-Docs/getting-started",
+              "Developer-Docs/self-hosted-config",
+              "Developer-Docs/token"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "Guides",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Dashboards",
             "pages": [
-              "api-reference/introduction"
+              "Guides/dashboards/edit-dashboard",
+              "Guides/dashboards/share-dashboard"
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Data Sources",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "Guides/data-sources/add-data-sources",
+              "Guides/data-sources/allow-ip-address"
+            ]
+          },
+          {
+            "group": "Getting Started",
+            "pages": [
+              "Guides/getting-started/what-is-databrain"
             ]
           }
         ]
