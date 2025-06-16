@@ -1,0 +1,59 @@
+---
+title: "Embed Functions"
+---
+
+You can add your own buttons with embed functions.
+
+To integrate and make use of specific **embed functions** within the `dbn-dashboard` component, you first need to locate the component with dbn-dashboard className on the webpage.
+
+Copy
+
+```
+const dbnDashboard = document.querySelector(
+    'dbn-dashboard'
+  )?.shadowRoot?.querySelector('.dbn-dashboard') as HTMLElement & {
+    onClickCreateMetric?: () => void;
+    onClickManageMetrics?: () => void;
+    onClickScheduleReports?: () => void;
+    onClickCustomizeLayout?: () => void;
+  };
+```
+
+Now you can add the buttons on your screen with these specific functions in **onClick** event of those buttons, here's an example:
+
+Copy
+
+```
+<Button type="button" onClick={() => dbnDashboard?.onClickCreateMetric?.()}>
+  Create Metric
+</Button>
+```
+
+There are four functions provided by the embed.
+
+- Copy
+
+  ```
+  onClickCreateMetric(): It will open the create metric modal.
+  ```
+- Copy
+
+  ```
+  onClickManageMetrics(): It will open the manage metrics modal.
+  ```
+- Copy
+
+  ```
+  onClickScheduleReports(): It will open the schedule reports modal.
+  ```
+- Copy
+
+  ```
+  onClickCustomizeLayout(): It will enable the customize layout mode.
+  ```
+
+**Note**: The functions will work only if you haven't disabled the respective operations. Also you need to disable the **showDashboardActions **in**options**  in**dbn-dashboard ** component**, **if you don't want to see the buttons provided by it that perform these actions and want to customize the buttons yourself.
+
+[PreviousServer Event](https://docs.usedatabrain.com/developer-docs/helpers/server-event)[NextOverride Language](https://docs.usedatabrain.com/developer-docs/helpers/override-language)
+
+Last updated 8 months ago

@@ -1,0 +1,96 @@
+---
+title: "Allow Access to our IP"
+---
+
+Getting Started with Database IP Whitelisting for Databrain
+
+**Requirements:**
+
+- An active database instance on one of the supported platforms: Amazon Redshift, BigQuery, ClickHouse, ElasticSearch, MySQL, Postgres, MongoDB, Snowflake, Databricks.
+- Admin-level permissions for the database instance to modify security settings.
+- Ensure Databrain's IP or IP range is known for whitelisting.
+- **Databrain IP Address**: 44.198.8.73
+
+### **Setup Guide**
+
+#### **For Public Database Instances:**
+
+#### **Ensure Databrain's Connectivity:**
+
+1. Ensure your database instance is active and Databrain can reach it.
+2. The connectivity largely depends on your cloud provider's permissions and security configurations.
+3. The most straightforward way to verify this is through your database's connectivity test feature or UI.
+
+#### **Whitelist Databrain's IP:**
+
+1. Navigate to the security or firewall settings of your database.
+2. **Rule Type**: Typically "Inbound" to allow incoming connections.
+3. **IP Address**: Input Databrain's IP or IP range.
+4. **Protocol & Port**: Defined by the database (e.g., TCP 3306 for MySQL).
+
+**Security Note**: Always ensure you only whitelist trusted IPs. Databrain's IP is required for seamless data integration.
+
+---
+
+#### **For Non-Public Database Instances:**
+
+#### **Setup Your Bastion Host or Jump Server:**
+
+ 1. Log in to your AWS Management Console.
+ 2. Navigate to the EC2 dashboard.
+ 3. Click on "Launch Instance" to start the instance creation wizard.
+ 4. Choose an appropriate Amazon Machine Image (AMI) based on your requirements. For a bastion host, you can typically use a standard Linux AMI such as Amazon Linux or Ubuntu.
+ 5. Select an instance type based on the expected workload and resource requirements.
+ 6. Ensure that the VPC selected for the bastion host is the same as the one where your database cluster resides. This ensures that the bastion host and database are within the same virtual network for seamless connectivity.
+ 7. Configure the instance details including the subnet within the selected VPC and any additional settings required for your environment.
+ 8. Add storage as needed for the instance.
+ 9. Configure security groups for the instance. Ensure that at least SSH (port 22) access is allowed from your IP address or range.
+10. Review the instance configuration and launch the EC2 instance.
+
+#### **Configure Database Security Group:**
+
+1. Navigate to the security group associated with your database cluster.
+2. Add inbound rules to allow traffic from the bastion host's security group on the port used by the database.
+3. This step allows incoming connections from the bastion host to the database cluster.
+
+#### **Whitelist Databrain's IP in Bastion's Security Settings:**
+
+1. Navigate to the security or firewall settings of your bastion host.
+2. **Rule Type**: Typically "Inbound" to allow incoming connections.
+3. **IP Address**: Input Databrain's IP or IP range.
+4. **Protocol & Port**: The port used for SSH (typically port 22).
+
+**Security Note**: Always ensure you only whitelist trusted IPs. Databrain's IP is required for seamless data integration.
+
+#### **Provide SSH details in Databrain app (connect datasource):**
+
+- **SSH Host**: [SSH host endpoint of the SSH instance. Ensure the Databrain IP is whitelisted.]
+- **SSH Port**: 22
+- **Username**: [Username to connect to SSH host]
+- **Private Key**: [Private key to authenticate with the SSH host]
+
+**Note**: This is applicable for PostgreSQL & Redshift only.
+
+---
+
+### **Finding Configuration Details in Your Database Platform:**
+
+#### **1. Rule Type:**
+
+Locate this under your database's security or firewall settings. Often labeled as "Inbound Rules" or "Access Control".
+
+#### **2. IP Address:**
+
+Use the IP or IP range provided by Databrain. This ensures Databrain can connect to your database.
+
+#### **3. Protocol & Port:**
+
+Check your database's documentation. Each database type generally has a standard protocol and port.
+
+**Remember to save any changes made to the security settings and periodically verify that the whitelisted IPs are accurate and up-to-date.**
+
+**Note**: The exact terms and navigation paths might vary slightly based on the cloud provider and database platform, but the overarching principle remains the same. Always refer to the specific documentation of the database or cloud provider for detailed steps.
+
+[PreviousAthena](https://docs.usedatabrain.com/guides/datasources/connecting-data-sources-to-databrain/athena)[NextAdd a Data Source](https://docs.usedatabrain.com/guides/datasources/add-a-data-source)
+
+Last updated 1 month ago

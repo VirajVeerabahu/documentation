@@ -1,0 +1,76 @@
+---
+title: "✨Getting Started"
+description: "
+
+How to Seamlessly Embed a DataBrain Dashboard
+
+To embed a DataBrain dashboard into your application, we offer a straightforward approach using the DataBrain npm package. Simply install this package, and then bring it into your application to access a range of components. These components enable you to display full dashboards or specific metrics as needed.
+ We've got you covered with a step-by-step guide here to help you integrate DataBrain dashboards into your user interface seamlessly.
+
+"
+---
+
+
+#### **Step-by-Step Guide to Embed DataBrain Dashboard**
+
+**Step 1: Install DataBrain _NPM _Package**
+
+Copy
+
+```
+npm install @databrainhq/plugin
+```
+
+**Step 2: Import the Plugin**
+
+Copy
+
+```
+import '@databrainhq/plugin/web';
+```
+
+**Step 3: Use the Components in Your Application**
+
+For embedding a Dashboard
+
+Copy
+
+```
+<dbn-dashboard token="token" dashboard-id="dashboardId" />
+```
+
+or
+
+For embedding a Metric Card
+
+Copy
+
+```
+<dbn-metric token="token" metric-id="metricId" />
+```
+
+- To find dashboardId please [see here](https://docs.usedatabrain.com/developer-docs/helpers/dashboard-id).
+- To find metricId please [see here](https://docs.usedatabrain.com/developer-docs/helpers/metric-id).
+
+**Token**
+
+The `token` should be a guest token, fetched from your backend based on the current user's login information. You can see more [about it here.](https://docs.usedatabrain.com/developer-docs/token)
+
+Here is an example with sample token and dashboardId that you can use in your frontend app to get started without a backend.
+
+Copy
+
+```
+<dbn-dashboard token="3affda8b-7bd4-4a88-9687-105a94cfffab" dashboard-id="ex-demo" />
+```
+
+#### **Additional Resources and Customization**
+
+- **Customizing the Look and Feel**:
+  - For further customizations related to the appearance of the embedded elements, [**_refer here._**](https://docs.usedatabrain.com/developer-docs/helpers/options)
+- **Understanding the Overall Architecture**:
+  - For a comprehensive understanding of the overarching architecture and how embedding fits into it, [**_refer here._**](https://docs.usedatabrain.com/developer-docs/helpers/architecture)
+
+With these steps, embedding DataBrain dashboards or metrics into your application can be done efficiently, offering a dynamic and insightful data visualization component to your users.
+
+[NextSelf Hosted Config](https://docs.usedatabrain.com/developer-docs/self-hosted-config)

@@ -1,0 +1,36 @@
+---
+title: "✳️  Token Body file"
+description: "Here you will see what are the fields to pass in the body while creating a guest token."
+---
+
+
+JSON body -
+
+- dataAppName (required string) - The name of the data app for which you are creating the guest token.
+- clientId (required string) - The primary key of the client/organization in the workspace for which you are creating the guest token.
+- params (optional JSON object) - Additional things you want to apply for the client/organization.
+- expiryTime (optional time in milliseconds) - The time in which you want the token to be expired.
+- datasourceName(required string with multi data source connection) - The data source name to be used as data connection. (not applicable for datasource or datamart connection).
+
+body -\> params (optional JSON object) -
+
+- rlsSettings (optional array of JSON object) - if you want to apply any rls settings then here you can pass the "metricId" for which you want to apply the filter and "values" which is an object of filter name and filter value.
+- appFilters (optional array of JSON object) - if you want to apply metric-level filters with the app filter variant then here you can pass the "metricId" for which you want to apply the filter and "values" which is an object of filter name and value.
+
+params -\> rlsSettings (optional array of JSON object) -
+
+- metricId (required string) - the id of the metric you want to apply the rls filters which you can find on the metric page in the header below the metric name.
+- values (required JSON object) - the filters name and value pairs that you want to apply.
+
+params -\> appFilters (optional array of JSON object) -
+
+- metricId (required string) - the id of the metric you want to apply the rls filters which you can find on the metric page in the header below the metric name.
+- values (required JSON object) - the filters name and value pairs that you want to apply.
+
+params -\> hideDashboardFilters(optional array of strings) -
+
+- array of name of filters
+
+[PreviousTest](https://docs.usedatabrain.com/developer-docs/test)[NextOptions](https://docs.usedatabrain.com/developer-docs/helpers/options)
+
+Last updated 1 month ago

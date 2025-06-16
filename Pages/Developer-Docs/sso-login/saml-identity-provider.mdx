@@ -1,0 +1,21 @@
+---
+title: "Saml Identity Provider (Idp) file"
+description: "Description of your new file."
+---
+
+
+1. Navigate to **MFA&SSO Settings **section on **Settings** page.
+2. Enable **SSO.**
+3. Click on **Save **button.
+4. Click on **\+IDP** button.
+5. In the **New IDP** form fill the following details:
+   - **Provider Type:** Choose **SAML** provider
+   - **Alias: **Choose unique id for the IDP. _eg:_ saml-idp-1
+   - **Redirect URI: **Copy this and use this endpoint as redirect uri to create your Identity provider application.
+   - **SP Entity ID/Issuer: **This will be the **ID** of the Service Provider(Databrain App) for this particular IDP. Use it to create your Identity Provider application.
+   - If your Identity Provider requires signature certificate of Service Provider(Databrain App) then click on **Download Signature Certificate** button and use it to create your Identity Provider application.
+   - **Display name:** Choose any name for your IDP.
+   - **Idp Entity ID/ Issuer:** Enter your Identity Provider application's **ID**. In Okta, you can get it from Applications-\> Your Application-\> Sign On -\> View SAML setup instructions. eg: http://www.okta.com/exkgbjqawotEyuxvX5d7
+   - **SSO Url:** Enter your Identity provider application's **Single Sign On Url**. In Okta, you can get it from Applications-\> Your Application-\> Sign On -\> View SAML setup instructions. eg: https://dev-61653336.okta.com/app/dev-61653336_samldb_1/exkgbjqawotEyuxvX5d7/sso/saml
+   - **Logout Url:** Enter your Identity provider application's **Single Logout Url**. In Okta, you can get it from Applications-\> Your Application-\> Sign On -\> View SAML setup instructions. eg: https://dev-61653336.okta.com/app/dev-61653336_samldb_1/exkgbjqawotEyuxvX5d7/slo/saml
+6. Click on **Create IDP** button.

@@ -1,0 +1,229 @@
+---
+title: "ℹ️Token"
+description: "Description of your new file."
+---
+
+ To obtain a guest token from DataBrain, utilize our REST API from your backend system. Each request will generate a unique guest token, ensuring security and flexibility.
+
+Once you acquire the guest token, you can seamlessly pass it to your frontend application, where it can be integrated with the [web component](https://docs.usedatabrain.com/developer-docs/).
+
+`Create API key from Databrain's dashboard` that should be passed in the headers in these requests.
+
+### `Quick start (simple use case):`
+
+When you need a guest token that you want to use across dashboards and metrics. All you have to do is pass clientId, dataAppName. If expiryTime is not passed, the token will not expire.
+
+Cloud Databrain:
+
+`POST` `https://api.usedatabrain.com/api/v2/guest-token/create`
+
+Self-hosted Databrain:
+
+`POST` `<SELF_HOSTED_URL>/api/v2/guest-token/create`
+
+Generating GUEST TOKEN for your Dashboard/Metric Component.
+
+#### **Headers**
+
+**Name**
+
+**Type**
+
+**Description**
+
+Authorization\*
+
+String
+
+Bearer [API TOKEN](https://docs.usedatabrain.com/developer-docs/helpers/api-token)
+
+#### **Request Body**
+
+**Name**
+
+**Type**
+
+**Description**
+
+dataAppName\*
+
+String
+
+Your Data App Name
+
+clientId\*
+
+String
+
+Client ID for whom this guest token is generated.  ("clientId": "None", if no tenancy is selected for connected datasource/datamart)
+
+params
+
+Object
+
+Additional Params: dashboard appFilters
+
+expiryTime
+
+Number
+
+In milli seconds
+
+datasourceName
+
+String
+
+datasource name from data studio (important\* and  in case of multi datasource connection to an embed)
+
+**200: OK { "token": "..." }**
+
+**400: Bad Request {"error": {"message": "invalid dashboard id", "code": \<ERROR_CODE\> }}**
+
+**401: Unauthorized {"error": {"message": "API key is invalid or expired", "code": "AUTHENTICATION_ERROR" }}**
+
+when the response is successful it returns a token that you can pass to the frontend.
+
+### **Request Body Examples:**
+
+Simple Request Body:
+
+Copy
+
+```
+{
+  "clientId": "id", //"None" if no tenancy available 
+  "dataAppName": "dataappname"
+}
+```
+
+Request Body with App Level Metric Filter:
+
+[App filterA metric level filter designed specifically for controlling access to individual metrics. Unlike general RLS settings. It restricts access without requiring end user input or control.](https://docs.usedatabrain.com/guides/filters/app-filter)
+
+Copy
+
+```
+{
+  "clientId": "id", //"None" if no tenancy available 
+  "dataAppName": "dataappname",
+  "params" : {
+     "appFilters": [{
+			“metricId”: “The id of the metric you want to have app filters”,
+			“values”: {
+				“paid_orders”: true,
+				“amount”: 500,
+				“country”: ["USA", "CANADA"] || "USA" // based on filter variant(select or multi select)
+				 {
+            				"sql": "SELECT \"name\" FROM \"public\".\"countries\" WHERE isEnabled=true",
+            				"columnName": "name"
+          			}
+	}
+		}]
+   }
+}
+```
+
+A sample Postman Collection:
+
+[2KB](https://1652544998-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FkUbjEzcTXrWaOrO7wsuI%2Fuploads%2FdX4r0ciEfeWNaHQB0Cz8%2FRequest.json?alt=media&token=4c8a063f-50fb-4e84-8cf8-ba8ea5521f79)
+
+[Request.json](https://1652544998-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FkUbjEzcTXrWaOrO7wsuI%2Fuploads%2FdX4r0ciEfeWNaHQB0Cz8%2FRequest.json?alt=media&token=4c8a063f-50fb-4e84-8cf8-ba8ea5521f79)
+
+### **Dashboard App Filters:**
+
+Request Body with Dashboard filters:
+
+Copy
+
+```
+{
+  "clientId": "id", //"None" if no tenancy available 
+  "dataAppName": "dataappname",
+  "params": {
+    "dashboardAppFilters": [
+      {
+        "dashboardId": "dashboard-id",
+        "values": {
+          // single string
+          "name": "Eric",
+          // multi select
+          "country": ["USA", "CANADA"] || "USA", || // based on filter variant(select or multi select)
+          {
+            "sql": "SELECT \"name\" FROM \"public\".\"countries\" WHERE isEnabled=true",
+            "columnName": "name"
+          } 
+          // date-picker
+          "timePeriod": { "startDate": "2024-01-01", "endDate": "2024-3-23" },
+          // range
+          "price": { "min": 1000, "max": 5000 }
+        }
+        "isShowOnUrl": true, // true/false
+      }
+    ]
+  }
+}
+```
+
+In the above code snippet, "name", "country", "timePeriod", and "price" are Dashboard App filters. When you disable the `isShowOnUrl`  the filter will not visible to end user as search params on URL.
+
+### **Datasource [Multi Datasource connection]:**
+
+Copy
+
+```
+{
+  "clientId": "id", //"None" if no tenancy available 
+  "dataAppName": "dataappname",
+  "datasourceName":"data source name" 
+}
+```
+
+`datasourceName` is available in app data studio tab
+
+### **Hide Dashboard Filters:**
+
+To hide dashboard filters in an embedded dashboard
+
+Copy
+
+```
+{
+    "clientId": "id", //"None" if no tenancy available 
+    "dataAppName": "dataappname",
+    "params":{
+        "hideDashboardFilters": ["filter 1", "filter 2"] // name of dashboard filters to hide
+    }
+}
+```
+
+### **Dashboard Permissions**
+
+To enable or disable few dashboard permissions from backend
+
+Copy
+
+```
+{
+    "clientId": "id", //"None" if no tenancy available 
+    "dataAppName": "dataappname",
+    "permissions": {
+       "isEnableArchiveMetrics": true, // true or false
+       "isEnableManageMetrics": true,  // true or false
+       "isEnableMetricUpdation": true, // true or false
+       "isEnableCustomizeLayout": true,// true or false
+       "isEnableUnderlyingData": true, // true or false
+       "isEnableDownloadMetrics": true, // true or false
+    },
+}
+```
+
+**Error Codes:**
+
+- 'AUTHENTICATION_ERROR'
+- 'INVALID_REQUEST_BODY'
+- 'CLIENT_ID_ERROR'
+-  'WORKSPACE_ID_ERROR'
+- 'DASHBOARD_PARAM_ERROR'
+- 'APP_FILTER_PARAM_ERROR'
+- 'RLS_SETTINGS_PARAM_ERROR'
+- 'INTERNAL_SERVER_ERROR'

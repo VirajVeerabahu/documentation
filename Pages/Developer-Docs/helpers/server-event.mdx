@@ -1,0 +1,57 @@
+---
+title: "🈂️Server Eventle"
+---
+
+It is a function prop that detects and retrieves error or loading occurring within dashboard component, facilitating timely resolution and enabling various automated tasks to be triggered in response.
+
+To make use of 'handle**-server-event ' **in dbn-dashboard, you first need to define the function that you want to pass to this prop in the global object, here's an example:
+
+Copy
+
+```
+window.databrainServerEvent = (code: string) => {
+  if (code) {
+    // do something
+  }
+}
+```
+
+To implement it in dbn-dashboard component:
+
+Copy
+
+```
+<dbn-dashboard handle-server-event="databrainServerEvent" />
+```
+
+This will attatch the funtion to the dbn-dashboard component, fetching the error or loading status which you can handle in your app.
+
+Below is the list of all the codes that you can get from dbn-dashboard:
+
+- TOKEN_EXPIRED
+- UNAUTHORIZED_ORIGIN
+- INVALID_TOKEN
+- INVALID_DASHBOARD_ID
+- IS_LOADING
+- DATA_LOADED
+- ENTER_FULL_SCREEN_MODE
+- EXIT_FULL_SCREEN_MODE
+- ENTER_SCHEDULED_REPORT_MODE
+- SAVE_SCHEDULED_REPORT
+- EXIT_SCHEDULED_REPORT_MODE
+- ENTER_CUSTOMIZE_LAYOUT_MODE
+- EXIT_CUSTOMIZE_LAYOUT_MODE
+- SAVE_LAYOUT
+- ENTER_MANAGE_METRICS_MODE
+- EXIT_MANAGE_METRICS_MODE
+- SAVE_MANAGE_METRICS
+- ARCHIVE_METRIC
+- DOWNLOAD_METRIC
+- DOWNLOAD_METRIC_WITHOUT_FILTERS
+- SAVE_METRIC_PNG
+- METRIC_FILTER_APPLIED
+- DASHBOARD_FILTER_APPLIED
+
+**_NOTE_**: If you get error like `Property 'functionName' does not exist on type 'Window & typeof globalThis'`, add the type of window as any.
+
+[PreviousCustom Fiscal Year filter setup in DataBrain](https://docs.usedatabrain.com/developer-docs/helpers/options/custom-fiscal-year-filter-setup-in-databrain)[NextEmbed Functions](https://docs.usedatabrain.com/developer-docs/helpers/embed-functions)

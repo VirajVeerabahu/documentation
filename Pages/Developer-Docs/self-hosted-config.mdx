@@ -1,0 +1,34 @@
+---
+title: "🎛️ Self Hosted Configew file"
+description: "Description of your new file."
+---
+
+When self hosted version of the app is used, the app needs to use these settings during embedding.
+
+To change the configs we need to add some changes -
+
+Where we are importing the plugin in the same file -
+
+Copy
+
+```
+import "@databrainhq/plugin/web";
+
+window.dbn = {
+  baseUrl: SELFHOSTED_URL,
+};
+```
+
+Assign configs in the `window.dbn` object. baseUrl - The base API endpoint e.g. https://api.example.com, https://yourdomain.com, etc.
+
+You may face typescript errors while assigning to `window.dbn` this can be resolved by adding the below code to any global `d.ts` file
+
+Copy
+
+```
+interface Window {
+  dbn: Record<string, string>;
+}
+```
+
+[PreviousGetting Started](https://docs.usedatabrain.com/developer-docs)[NextSSO Login](https://docs.usedatabrain.com/developer-docs/sso-login)
